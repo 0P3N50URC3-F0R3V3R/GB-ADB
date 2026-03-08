@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GADB - Goldberg Achievement Database</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/dataTables.bootstrap5.min.css">
+<style>
+    :root {
+        --discord-dark: #36393f;
+        --discord-card: #2f3136;
+        --discord-sidebar: #202225;
+        --discord-blurple: #7289da;
+        --discord-text: #dcddde;
+        --discord-hover: #42464d;
+        --discord-table-stripe: #2e3035;
+        --discord-muted: #8e9297;
+    }
+
+    body { 
+        background-color: var(--discord-dark); 
+        color: var(--discord-text); 
+        display: flex; 
+        flex-direction: column; 
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    .container { flex: 1 0 auto; }
+    .card { background-color: var(--discord-card); border: none; color: var(--discord-text); }
+    
+    .table { 
+        color: var(--discord-text) !important; 
+        border-color: #444 !important;
+    }
+
+    table.dataTable tbody tr {
+        background-color: var(--discord-card) !important;
+        color: var(--discord-text) !important;
+    }
+
+    table.dataTable.table-striped tbody tr:nth-of-type(odd) {
+        background-color: var(--discord-table-stripe) !important;
+    }
+
+    table.dataTable.table-hover tbody tr:hover {
+        background-color: var(--discord-hover) !important;
+        color: #ffffff !important;
+    }
+
+    table.dataTable tbody tr:hover td {
+        color: #ffffff !important;
+        background-color: transparent !important;
+    }
+
+    .table thead th { 
+        background-color: var(--discord-sidebar) !important; 
+        color: white !important; 
+        border-bottom: 2px solid #444 !important;
+    }
+
+    .dataTables_filter {
+        width: 100%;
+        text-align: left !important;
+        margin-bottom: 20px;
+    }
+    .dataTables_filter label {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-weight: bold;
+    }
+    .dataTables_filter input {
+        background-color: var(--discord-sidebar) !important;
+        border: 1px solid #444 !important;
+        color: white !important;
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding: 10px 15px;
+        border-radius: 8px;
+    }
+    
+    .form-select { background-color: var(--discord-sidebar); border: 1px solid #444; color: white; }
+    .btn-blurple { background-color: var(--discord-blurple); color: white; border: none; }
+    .btn-blurple:hover { background-color: #5b6eae; color: white; }
+
+    .footer { flex-shrink: 0; background: var(--discord-sidebar); border-top: 1px solid #444; padding: 20px 0; }
+    .stats-bar { background: rgba(0,0,0,0.2); padding: 10px 0; font-size: 0.85rem; color: #8e9297; text-transform: uppercase; letter-spacing: 1px; }
+	
+    .pagination { margin: 10px 0; }
+    .page-item .page-link {
+        background-color: var(--discord-sidebar) !important;
+        border-color: #444 !important;
+        color: var(--discord-text) !important;
+        transition: 0.2s;
+        padding: 8px 14px;
+    }
+    .page-item .page-link:hover {
+        background-color: var(--discord-hover) !important;
+        color: white !important;
+    }
+    .page-item.active .page-link {
+        background-color: var(--discord-blurple) !important;
+        border-color: var(--discord-blurple) !important;
+        color: white !important;
+    }
+    .page-item.disabled .page-link {
+        background-color: var(--discord-dark) !important;
+        border-color: #333 !important;
+        color: #666 !important;
+    }
+
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    .paginate_button { margin: 0 2px !important; }
+    
+    /* Finomított leírás stílus */
+    .description-text {
+        max-width: 800px;
+        margin: 0 auto;
+        color: var(--discord-muted);
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+</style>
+</head>
+<body class="d-flex flex-column h-100">
+
+<div class="container py-5 text-center">
+    <h1 class="fw-bold" style="color: white;">Goldberg Compatible - Achievement Database</h1>
+    <div class="description-text mb-5"><p style="text-align:justify; font-size:15px;">
+        This database is only compatible with the <b>Goldberg Emulator GBE2 fork</b>. 
+        Achievements are provided as-is; there is no guarantee they will work. 
+        This project strictly uses files in the goldberg(v2) fork-format.<br> 
+        <center><span class="text-danger d-block mt-2" style="font-size:18px;">IT WILL NOT WORK ON OLDER(V1) GOLDBERG VERSIONS!</span></center></p>
+    </div>
+    
+    <div class="card shadow-lg p-4 mb-4 text-start">
+        <table id="gameTable" class="table table-hover w-100">
+            <thead>
+                <tr>
+                    <th>AppID</th>
+                    <th>Game Name</th>
+                    <th>Size</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<div class="stats-bar text-center">
+    <div class="container d-flex justify-content-around flex-wrap">
+        <span>Total Games: <b id="stat-count" class="text-white">-</b></span>
+        <span>Storage Size: <b id="stat-size" class="text-white">-</b></span>
+        <span>Database Updated: <b id="stat-date" class="text-white">-</b></span>
+    </div>
+</div>
+
+<footer class="footer text-center">
+    <div class="container">
+        <span class="small text-muted">&copy; 2026 GADB Project - For the community.</span>
+    </div>
+</footer>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $.getJSON("cache.json", function(data) {
+        $('#stat-count').text(data.stats.count);
+        $('#stat-size').text(data.stats.total_size);
+        $('#stat-date').text(data.stats.last_update);
+
+        var table = $('#gameTable').DataTable({
+            "data": data.games,
+            "dom": '<"row"<"col-md-6"l><"col-md-6"f>><"row"<"col-12 pagination-container"p>>rt<"row"<"col-12 pagination-container"p>><"row"<"col-12 text-center"i>>',
+            "pagingType": "full_numbers",
+            "columns": [
+                { "data": "appid", "width": "15%" },
+                { "data": "name", "width": "55%" },
+                { "data": "size", "width": "15%" },
+                { 
+                    "data": "file",
+                    "width": "15%",
+                    "render": function(d) {
+                        return '<a href="ACHDB/' + d + '" class="btn btn-sm btn-blurple px-3 w-100" download>Download</a>';
+                    }
+                }
+            ],
+            "pageLength": 25,
+            "lengthMenu": [10, 25, 50, 100, 150],
+            "order": [[0, "asc"]],
+            "language": {
+                "search": "Search by Steam AppID or Name (use ' ; ' to split multiple appid or names):",
+				"searchPlaceholder": "Search by appid or name eg: 480; Half-Life; 350090; even multiple titles ...",
+                "lengthMenu": "Show _MENU_ per page",
+                "paginate": {
+                    "first": "<<",
+                    "last": ">>",
+                    "next": ">",
+                    "previous": "<"
+                }
+            }
+        });
+
+        $('.dataTables_filter input').unbind().bind('keyup', function() {
+            var searchTerm = this.value;
+            if (!searchTerm) {
+                table.search('').draw();
+                return;
+            }
+
+            var keywords = searchTerm.split(';').map(function(item) {
+                return item.trim();
+            }).filter(function(item) {
+                return item.length > 0;
+            });
+
+            if (keywords.length > 0) {
+                var escapedKeywords = keywords.map(function(k) {
+                    return k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                });
+                var regex = '(' + escapedKeywords.join('|') + ')';
+                table.search(regex, true, false).draw();
+            } else {
+                table.search('').draw();
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
