@@ -29,6 +29,8 @@ Each download provides the necessary files for the Goldberg Emulator:
 
 ## 🛠️ Usage / Installation
 
+THIS IS JUST A SAMPLE! EVERY GAME USES DIFFERENT FOLDER STRUCTURE! YOU NEED TO BE CREATIVE! XD
+
 To add achievements to your game using the Goldberg Emulator (GBE2), follow these steps:
 
 1. **Locate your game folder:** Find the directory where the game's executable (`.exe`) is located.
