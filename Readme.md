@@ -55,6 +55,9 @@ To add achievements to your game using the Goldberg Emulator (GBE2), follow thes
 > [!IMPORTANT]
 > This project is designed **STRICTLY** for the **Goldberg Emulator V2 (GBE2 fork)**. These files will **NOT** work with older versions of the Goldberg emulator due to the structural changes in how achievements are handled.
 
+> [!IMPORTANT]
+> SOME ACHIEVEMENTS ARE IN OTHER LANGUAGE! THOSE WILL BE CHANGED IN THE FUTURE!
+
 ---
 
 ## 🛠️ Technical Background
