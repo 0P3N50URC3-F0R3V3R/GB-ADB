@@ -10,7 +10,7 @@ A comprehensive, automated database of Steam achievements formatted specifically
 
 ## 🚀 Features
 
-* **Massive Library:** Currently indexing **5,600+ games - AND UPDATING DAY BY DAY** with a target of covering the entire Steam catalog.
+* **Massive Library:** Currently indexing **Thousand of games - AND UPDATING DAY BY DAY** with a target of covering the entire Steam catalog.
 * **Plug & Play:** Achievement schemas are provided in the exact folder structure required by the emulator.
 * **Multi-Search:** Advanced search bar supporting Steam **AppID** or **Game Name**.
 * **Automated Updates:** Data is continuously scraped and verified using a custom Python-based mining tool.
