@@ -118,14 +118,31 @@
         width: 100%;
     }
     .paginate_button { margin: 0 2px !important; }
-    
-    /* Finomított leírás stílus */
+
     .description-text {
         max-width: 800px;
         margin: 0 auto;
         color: var(--discord-muted);
         font-size: 0.95rem;
         line-height: 1.5;
+    }
+    table.dataTable.stripe tbody tr.odd, 
+    table.dataTable.display tbody tr.odd {
+        background-color: var(--discord-background) !important;
+    }
+
+    table.dataTable.stripe tbody tr.even, 
+    table.dataTable.display tbody tr.even {
+        background-color: #2f3136 !important; /* Ez egy leheletnyivel világosabb Discord-szürke */
+    }
+
+    table.dataTable td {
+        border-top: 1px solid #444 !important;
+    }
+
+    table.dataTable.hover tbody tr:hover,
+    table.dataTable.display tbody tr:hover {
+        background-color: #393c43 !important;
     }
 </style>
 </head>
