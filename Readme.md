@@ -38,6 +38,7 @@ To add achievements to your game using the Goldberg Emulator (GBE2), follow thes
 3. **Copy the files:** * Navigate to the folder where `steam_api64.dll` (or `steam_api.dll`) is found.
    * Create a folder named `steam_settings` if it doesn't exist.
    * Place the `achievements.json`, `stats.json`, and the `achievement_images` folder inside the `steam_settings` directory.
+   * EDIT force_language.txt to "English" -> Without quotes! Or just simply remove force_language.txt!!
 4. **Final Structure:** Your game folder should look like this:
    ```text
    YourGame/
