@@ -2,6 +2,8 @@
 
 [![Live Database](https://img.shields.io/badge/Live-Database-7289da?style=for-the-badge&logo=github)](https://0p3n50urc3-f0r3v3r.github.io/GB-ADB/)
 
+## THIS REPOS IS JUST A "DEMO" VERSION! THE FULL REPO WILL BE TOO LARGE(32GB+) TO HOST IT ON GITHUB, SO WHEN I DID FINISHED THE WHOLE THING, THE WHOLE TATABASE WILL BE AVAILABLE FOR SEPARATE DOWNLOADING! UNTIL THEN THIS IS A DEMO WITH MORE THAN 15k GAMES IN DATABASE!!
+
 A comprehensive, automated database of Steam achievements formatted specifically for the **Goldberg Emulator (GBE2 fork)**. This project aims to bridge the gap for titles missing achievement schemas in the Goldberg V2 format.
 
 🔗 **Access the Live Database here:** [https://0p3n50urc3-f0r3v3r.github.io/GB-ADB/](https://0p3n50urc3-f0r3v3r.github.io/GB-ADB/)
